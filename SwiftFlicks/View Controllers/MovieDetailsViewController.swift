@@ -14,16 +14,18 @@ class MovieDetailsViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var synopsisLabel: UILabel!
 
-    var movie: NSDictionary!
+    var movie: Movie!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        titleLabel.text = movie["title"] as? String
-        synopsisLabel.text = movie["synopsis"] as? String
+        titleLabel.text = movie.title
+        synopsisLabel.text = movie.synopsis
+        posterView.setImageWithURL(movie.posterThumbnailUrl)
 
-        let url = NSURL(string: movie.valueForKeyPath("posters.thumbnail") as! String)!
-        posterView.setImageWithURL(url)
+        if let highResPosterUrl = movie.postImageUrl {
+            posterView.loadAsync(highResPosterUrl)
+        }
     }
 
     override func didReceiveMemoryWarning() {

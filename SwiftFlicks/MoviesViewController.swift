@@ -12,7 +12,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
     @IBOutlet weak var tableView: UITableView!
 
-    var movies: [NSDictionary]?
+    var movies: [Movie]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +25,11 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             Void in
             let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary
             if let json = json {
-                self.movies = json["movies"] as? [NSDictionary]
-                self.tableView.reloadData()
+                let movies = json["movies"] as? [NSDictionary]
+                if let movies = movies {
+                    self.movies = Movie.moviesWithArray(movies)
+                    self.tableView.reloadData()
+                }
             }
         }
         tableView.dataSource = self
@@ -50,11 +53,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         var cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
 
         let movie = movies![indexPath.row]
-        cell.titleLabel.text = movie["title"] as? String
-        cell.synopsisLabel.text = movie["synopsis"] as? String
-
-        let url = NSURL(string: movie.valueForKeyPath("posters.thumbnail") as! String)!
-        cell.posterView.loadAsync(url)
+        cell.titleLabel.text = movie.title
+        cell.synopsisLabel.text = movie.synopsis
+        cell.posterView.loadAsync(movie.posterThumbnailUrl!)
 
         return cell
     }
