@@ -13,9 +13,11 @@ enum ViewMode {
     case DVD
 }
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
+
     @IBOutlet weak var announcementView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
 
@@ -24,7 +26,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
     var movies: [Movie]?
     var searchResult: [Movie]?
-    var viewMode: ViewMode?
+    var viewMode: ViewMode = .Movie
 
     var apiUrlString: String {
         get {
@@ -45,10 +47,17 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
 
         self.navigationItem.title = screenTitle
+        self.edgesForExtendedLayout = UIRectEdge.None
         announcementView.hidden = true
 
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.hidden = true
+
+        collectionView.dataSource = self
+        collectionView.hidden = false
+//        collectionView.contentInset = UIEdgeInsetsMake(navigationController!.navigationBar.frame.height, 0, 0, 0)
+
         searchBar.delegate = self
 
         refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
@@ -62,30 +71,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - UITableViewDataSource
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isSearch {
-            if let searchResult = searchResult {
-                return searchResult.count
-            }
-        } else if let movies = movies {
-            return movies.count
-        }
-        return 0
-    }
-
     // MARK: - UITableViewDelegate
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
-
-        let movie = isSearch ? searchResult![indexPath.row] : movies![indexPath.row]
-        cell.titleLabel.text = movie.title
-        cell.synopsisLabel.text = movie.synopsis
-        cell.posterView.loadAsync(movie.posterThumbnailUrl!)
-
-        return cell
-    }
-
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         searchBar.resignFirstResponder()
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -126,6 +112,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                     if let movies = movies {
                         self.movies = Movie.moviesWithArray(movies)
                         self.tableView.reloadData()
+                        self.collectionView.reloadData()
                         MBProgressHUD.hideHUDForView(self.view, animated: true)
                     }
                 }
@@ -150,4 +137,55 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         movieDetailsViewController.movie = movie
     }
 
+}
+
+extension MoviesViewController : UITableViewDataSource {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isSearch {
+            if let searchResult = searchResult {
+                return searchResult.count
+            }
+        } else if let movies = movies {
+            return movies.count
+        }
+        return 0
+    }
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
+
+        let movie = isSearch ? searchResult![indexPath.row] : movies![indexPath.row]
+        cell.titleLabel.text = movie.title
+        cell.synopsisLabel.text = movie.synopsis
+        cell.posterView.loadAsync(movie.posterThumbnailUrl!)
+
+        return cell
+    }
+}
+
+extension MoviesViewController : UICollectionViewDataSource {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if isSearch {
+            if let searchResult = searchResult {
+                return searchResult.count
+            }
+        } else if let movies = movies {
+            return movies.count
+        }
+        return 0
+    }
+
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieGridCell", forIndexPath: indexPath) as! MovieGridCell
+        let movie = isSearch ? searchResult![indexPath.row] : movies![indexPath.row]
+        cell.posterView.loadAsync(movie.posterThumbnailUrl!)
+        cell.titleLabel.text = movie.title
+        return cell
+    }
+}
+
+extension MoviesViewController : UICollectionViewDelegateFlowLayout {
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return CGSize(width: 100, height: 100)
+    }
 }
