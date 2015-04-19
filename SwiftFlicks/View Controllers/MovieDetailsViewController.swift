@@ -19,6 +19,8 @@ class MovieDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationItem.title = movie.title
+
         titleLabel.text = movie.title
         synopsisLabel.text = movie.synopsis
         posterView.setImageWithURL(movie.posterThumbnailUrl)

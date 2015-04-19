@@ -36,7 +36,6 @@ class Movie {
             if let range = range {
                 posterUrlString = posterUrlString.stringByReplacingCharactersInRange(range, withString: "https://content6.flixster.com/")
             }
-            println(posterUrlString)
             postImageUrl = NSURL(string: posterUrlString)
         }
     }
