@@ -11,12 +11,12 @@
 		5304542A1AE0EE6600A5E1D7 /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530454291AE0EE6600A5E1D7 /* MovieDetailsViewController.swift */; };
 		5304542D1AE2F4BB00A5E1D7 /* UIImageView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5304542C1AE2F4BB00A5E1D7 /* UIImageView+Utils.swift */; };
 		530454301AE3214300A5E1D7 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5304542F1AE3214300A5E1D7 /* Movie.swift */; };
+		536BCC851AE3828B00474ECC /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BCC841AE3828B00474ECC /* MoviesViewController.swift */; };
 		5381FEB61ADDF223006A72FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5381FEB51ADDF223006A72FB /* AppDelegate.swift */; };
 		5381FEBB1ADDF223006A72FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5381FEB91ADDF223006A72FB /* Main.storyboard */; };
 		5381FEBD1ADDF223006A72FB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5381FEBC1ADDF223006A72FB /* Images.xcassets */; };
 		5381FEC01ADDF223006A72FB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5381FEBE1ADDF223006A72FB /* LaunchScreen.xib */; };
 		5381FECC1ADDF223006A72FB /* SwiftFlicksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5381FECB1ADDF223006A72FB /* SwiftFlicksTests.swift */; };
-		5381FED61ADDF24F006A72FB /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5381FED51ADDF24F006A72FB /* MoviesViewController.swift */; };
 		6C7D7307EC302FA8FFBAEFBE /* libPods-SwiftFlicks.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BA3BE152252DC749C8D6848 /* libPods-SwiftFlicks.a */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +36,7 @@
 		530454291AE0EE6600A5E1D7 /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
 		5304542C1AE2F4BB00A5E1D7 /* UIImageView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Utils.swift"; sourceTree = "<group>"; };
 		5304542F1AE3214300A5E1D7 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		536BCC841AE3828B00474ECC /* MoviesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 		5381FEB01ADDF223006A72FB /* SwiftFlicks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftFlicks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5381FEB41ADDF223006A72FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5381FEB51ADDF223006A72FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -45,7 +46,6 @@
 		5381FEC51ADDF223006A72FB /* SwiftFlicksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftFlicksTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5381FECA1ADDF223006A72FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5381FECB1ADDF223006A72FB /* SwiftFlicksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftFlicksTests.swift; sourceTree = "<group>"; };
-		5381FED51ADDF24F006A72FB /* MoviesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoviesViewController.swift; path = ../MoviesViewController.swift; sourceTree = "<group>"; };
 		6BA3BE152252DC749C8D6848 /* libPods-SwiftFlicks.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SwiftFlicks.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEAD79A85032EDD30102F953 /* Pods-SwiftFlicks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftFlicks.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftFlicks/Pods-SwiftFlicks.debug.xcconfig"; sourceTree = "<group>"; };
 		DC8772C6C00EBA3FC00FEF75 /* Pods-SwiftFlicks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftFlicks.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftFlicks/Pods-SwiftFlicks.release.xcconfig"; sourceTree = "<group>"; };
@@ -159,8 +159,8 @@
 		53C0D1971AE031490033396E /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				536BCC841AE3828B00474ECC /* MoviesViewController.swift */,
 				530454291AE0EE6600A5E1D7 /* MovieDetailsViewController.swift */,
-				5381FED51ADDF24F006A72FB /* MoviesViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -320,9 +320,9 @@
 				5304542A1AE0EE6600A5E1D7 /* MovieDetailsViewController.swift in Sources */,
 				5381FEB61ADDF223006A72FB /* AppDelegate.swift in Sources */,
 				530454301AE3214300A5E1D7 /* Movie.swift in Sources */,
-				5381FED61ADDF24F006A72FB /* MoviesViewController.swift in Sources */,
 				5304542D1AE2F4BB00A5E1D7 /* UIImageView+Utils.swift in Sources */,
 				530454251AE0384800A5E1D7 /* MovieCell.swift in Sources */,
+				536BCC851AE3828B00474ECC /* MoviesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,21 +8,43 @@
 
 import UIKit
 
+enum ViewMode {
+    case Movie
+    case DVD
+}
+
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var announcementView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
 
+    let apiMoviesUrlString = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=dagqdghwaq3e3mxyrp7kmmj5&limit=20&country=us"
+    let apiDVDUrlString = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=dagqdghwaq3e3mxyrp7kmmj5&limit=20&country=us"
+
     var movies: [Movie]?
     var searchResult: [Movie]?
+    var viewMode: ViewMode?
+
+    var apiUrlString: String {
+        get {
+            return viewMode == .Movie ? apiMoviesUrlString : apiDVDUrlString
+        }
+    }
+
+    var screenTitle: String {
+        get {
+            return viewMode == .Movie ? "Movies" : "DVD"
+        }
+    }
+
     var refreshControl = UIRefreshControl()
     var isSearch = false
 
-    let apiUrlString = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=dagqdghwaq3e3mxyrp7kmmj5&limit=20&country=us"
-
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.navigationItem.title = screenTitle
         announcementView.hidden = true
 
         tableView.dataSource = self

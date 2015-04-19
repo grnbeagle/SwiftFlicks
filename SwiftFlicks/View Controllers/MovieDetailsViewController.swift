@@ -11,8 +11,7 @@ import UIKit
 class MovieDetailsViewController: UIViewController {
 
     @IBOutlet weak var posterView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var synopsisLabel: UILabel!
+    @IBOutlet var scrollView: UIScrollView!
 
     var movie: Movie!
 
@@ -21,13 +20,29 @@ class MovieDetailsViewController: UIViewController {
 
         self.navigationItem.title = movie.title
 
-        titleLabel.text = movie.title
-        synopsisLabel.text = movie.synopsis
         posterView.setImageWithURL(movie.posterThumbnailUrl)
 
         if let highResPosterUrl = movie.postImageUrl {
             posterView.loadAsync(highResPosterUrl, animate: false)
         }
+
+        var topPosition: CGFloat = 350
+        var contentView = UIView(frame: CGRect(x: CGFloat(0), y: topPosition, width: view.frame.width, height: view.frame.height))
+        contentView.backgroundColor = UIColor.blackColor()
+        contentView.alpha = 0.75
+        scrollView.addSubview(contentView)
+
+        var contentLabel = UILabel(frame: CGRect(x: 15, y: 15, width: 290, height: 20))
+        contentLabel.text = movie.synopsis
+        contentLabel.textColor = UIColor.whiteColor()
+        contentLabel.numberOfLines = 0
+        contentLabel.sizeToFit()
+
+        contentView.addSubview(contentLabel)
+
+        var scrollHeight = topPosition + contentView.frame.height - navigationController!.toolbar.frame.height
+        scrollView.contentSize = CGSize(width: 320, height: scrollHeight)
+
     }
 
     override func didReceiveMemoryWarning() {
