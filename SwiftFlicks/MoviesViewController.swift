@@ -8,13 +8,16 @@
 
 import UIKit
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var announcementView: UIView!
+    @IBOutlet weak var searchBar: UISearchBar!
 
     var movies: [Movie]?
+    var searchResult: [Movie]?
     var refreshControl = UIRefreshControl()
+    var isSearch = false
 
     let apiUrlString = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=dagqdghwaq3e3mxyrp7kmmj5&limit=20&country=us"
 
@@ -24,6 +27,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
         tableView.dataSource = self
         tableView.delegate = self
+        searchBar.delegate = self
 
         refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(refreshControl)
@@ -36,18 +40,23 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         // Dispose of any resources that can be recreated.
     }
 
+    // MARK: - UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let movies = movies {
+        if isSearch {
+            if let searchResult = searchResult {
+                return searchResult.count
+            }
+        } else if let movies = movies {
             return movies.count
-        } else {
-            return 0
         }
+        return 0
     }
 
+    // MARK: - UITableViewDelegate
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
 
-        let movie = movies![indexPath.row]
+        let movie = isSearch ? searchResult![indexPath.row] : movies![indexPath.row]
         cell.titleLabel.text = movie.title
         cell.synopsisLabel.text = movie.synopsis
         cell.posterView.loadAsync(movie.posterThumbnailUrl!)
@@ -56,7 +65,23 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        searchBar.resignFirstResponder()
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+
+    // MARK: - UISearchBarDelegate
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        isSearch = !searchBar.text.isEmpty
+        if isSearch {
+            let results = movies?.filter({ (movie) -> Bool in
+                return movie.title?.lowercaseString.rangeOfString(searchBar.text.lowercaseString) != nil
+            })
+
+            searchResult = results
+        } else {
+            searchResult = []
+        }
+        tableView.reloadData()
     }
 
     func fetchData() {
