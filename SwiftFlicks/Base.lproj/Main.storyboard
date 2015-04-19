@@ -16,6 +16,20 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="COn-FH-6wu">
+                                    <rect key="frame" x="0.0" y="202" width="320" height="52"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There was an error!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="isb-TK-EyM">
+                                            <rect key="frame" x="8" y="8" width="304" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="116" id="YU8-FH-mr6" customClass="MovieCell" customModule="SwiftFlicks" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="86" width="320" height="116"/>
@@ -58,6 +72,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Movies" id="ct4-Gy-0Tz"/>
                     <connections>
+                        <outlet property="announcementView" destination="COn-FH-6wu" id="D9W-w2-aq0"/>
                         <outlet property="tableView" destination="9EA-CY-qqQ" id="Wxv-KF-v5L"/>
                     </connections>
                 </viewController>

@@ -24,7 +24,7 @@ class MovieDetailsViewController: UIViewController {
         posterView.setImageWithURL(movie.posterThumbnailUrl)
 
         if let highResPosterUrl = movie.postImageUrl {
-            posterView.loadAsync(highResPosterUrl)
+            posterView.loadAsync(highResPosterUrl, animate: false)
         }
     }
 

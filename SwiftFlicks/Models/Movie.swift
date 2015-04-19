@@ -25,7 +25,7 @@ class Movie {
         title = dictionary["title"] as? String
         synopsis = dictionary["synopsis"] as? String
 
-        var thumbnailUrlString = dictionary.valueForKeyPath("posters.thumbnail") as? String
+        var thumbnailUrlString = dictionary.valueForKeyPath("posters.detailed") as? String
 
         if let thumbnailUrlString = thumbnailUrlString {
             posterThumbnailUrl = NSURL(string: thumbnailUrlString)
@@ -36,6 +36,7 @@ class Movie {
             if let range = range {
                 posterUrlString = posterUrlString.stringByReplacingCharactersInRange(range, withString: "https://content6.flixster.com/")
             }
+            println(posterUrlString)
             postImageUrl = NSURL(string: posterUrlString)
         }
     }

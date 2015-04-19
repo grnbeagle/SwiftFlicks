@@ -11,24 +11,38 @@ import UIKit
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var announcementView: UIView!
 
     var movies: [Movie]?
+    let refreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        announcementView.hidden = true
 
         let urlString = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=dagqdghwaq3e3mxyrp7kmmj5&limit=20&country=us"
-
         let url = NSURL(string: urlString)!
         let request = NSURLRequest(URL: url)
+
+        MBProgressHUD.showHUDAddedTo(view, animated: true)
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse!, data: NSData!, error: NSError!) ->
             Void in
-            let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary
-            if let json = json {
-                let movies = json["movies"] as? [NSDictionary]
-                if let movies = movies {
-                    self.movies = Movie.moviesWithArray(movies)
-                    self.tableView.reloadData()
+            if self.view == nil {
+                return
+            }
+            if (error != nil) {
+                // show announcement view
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
+                self.announcementView.hidden = false
+            } else {
+                let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary
+                if let json = json {
+                    let movies = json["movies"] as? [NSDictionary]
+                    if let movies = movies {
+                        self.movies = Movie.moviesWithArray(movies)
+                        self.tableView.reloadData()
+                        MBProgressHUD.hideHUDForView(self.view, animated: true)
+                    }
                 }
             }
         }

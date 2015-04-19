@@ -3,6 +3,7 @@
 
 target 'SwiftFlicks' do
   pod "AFNetworking"
+  pod "MBProgressHUD"
 end
 
 target 'SwiftFlicksTests' do
