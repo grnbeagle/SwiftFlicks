@@ -13,10 +13,22 @@ class MovieCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var synopsisLabel: UILabel!
     @IBOutlet weak var posterView: UIImageView!
+    @IBOutlet weak var containerView: UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
+        contentView.backgroundColor = UIColor.flicksLightGrayColor()
+//        self.contentView.frame = CGRectOffset(self.contentView.frame, -20, -20)
+
+        containerView.layer.cornerRadius = 3
+        containerView.layer.borderColor = UIColor.flicksMediumGrayColor().CGColor
+        containerView.layer.borderWidth = 1
+
+        containerView.layer.shadowColor = UIColor.blackColor().CGColor
+        containerView.layer.shadowOpacity = 0.5
+        containerView.layer.shadowRadius = 3.0
+        containerView.layer.shadowOffset = CGSizeMake(2.0, 2.0)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

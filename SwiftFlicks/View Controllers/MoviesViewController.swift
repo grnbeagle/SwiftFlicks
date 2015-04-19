@@ -48,14 +48,19 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDe
 
         self.navigationItem.title = screenTitle
         self.edgesForExtendedLayout = UIRectEdge.None
+
         announcementView.hidden = true
 
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.hidden = true
+        tableView.backgroundColor = UIColor.flicksLightGrayColor()
+        tableView.separatorColor = UIColor.flicksLightGrayColor()
+        tableView.separatorInset = UIEdgeInsetsZero
+        tableView.layoutMargins = UIEdgeInsetsZero
+        tableView.hidden = false
 
         collectionView.dataSource = self
-        collectionView.hidden = false
+        collectionView.hidden = true
 //        collectionView.contentInset = UIEdgeInsetsMake(navigationController!.navigationBar.frame.height, 0, 0, 0)
 
         searchBar.delegate = self
@@ -158,7 +163,8 @@ extension MoviesViewController : UITableViewDataSource {
         cell.titleLabel.text = movie.title
         cell.synopsisLabel.text = movie.synopsis
         cell.posterView.loadAsync(movie.posterThumbnailUrl!)
-
+        cell.separatorInset = UIEdgeInsetsZero
+        cell.layoutMargins = UIEdgeInsetsZero
         return cell
     }
 }

@@ -18,11 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         var storyboard = UIStoryboard(name: "Main", bundle: nil)
+        UINavigationBar.appearance().barTintColor = UIColor.flicksDarkGrayColor()
+        UINavigationBar.appearance().barStyle = UIBarStyle.Black
 
         var moviesViewController = storyboard.instantiateViewControllerWithIdentifier("MoviesViewController") as? MoviesViewController
         moviesViewController?.viewMode = .Movie
         var moviesNavController = UINavigationController(rootViewController: moviesViewController!)
         moviesNavController.tabBarItem.title = "Movies"
+
 
         var dvdViewController = storyboard.instantiateViewControllerWithIdentifier("MoviesViewController") as? MoviesViewController
         dvdViewController?.viewMode = .DVD
@@ -31,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         var tabBarController = UITabBarController()
         tabBarController.viewControllers = [moviesNavController, dvdNavController]
+
 
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()

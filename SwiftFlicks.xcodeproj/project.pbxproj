@@ -13,6 +13,7 @@
 		530454301AE3214300A5E1D7 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5304542F1AE3214300A5E1D7 /* Movie.swift */; };
 		536BCC851AE3828B00474ECC /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BCC841AE3828B00474ECC /* MoviesViewController.swift */; };
 		536BCC901AE3960A00474ECC /* MovieGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BCC8F1AE3960A00474ECC /* MovieGridCell.swift */; };
+		536BCC921AE4521F00474ECC /* UIColor+Flicks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BCC911AE4521F00474ECC /* UIColor+Flicks.swift */; };
 		5381FEB61ADDF223006A72FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5381FEB51ADDF223006A72FB /* AppDelegate.swift */; };
 		5381FEBB1ADDF223006A72FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5381FEB91ADDF223006A72FB /* Main.storyboard */; };
 		5381FEBD1ADDF223006A72FB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5381FEBC1ADDF223006A72FB /* Images.xcassets */; };
@@ -39,6 +40,7 @@
 		5304542F1AE3214300A5E1D7 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		536BCC841AE3828B00474ECC /* MoviesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 		536BCC8F1AE3960A00474ECC /* MovieGridCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieGridCell.swift; sourceTree = "<group>"; };
+		536BCC911AE4521F00474ECC /* UIColor+Flicks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Flicks.swift"; sourceTree = "<group>"; };
 		5381FEB01ADDF223006A72FB /* SwiftFlicks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftFlicks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5381FEB41ADDF223006A72FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5381FEB51ADDF223006A72FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				5304542C1AE2F4BB00A5E1D7 /* UIImageView+Utils.swift */,
+				536BCC911AE4521F00474ECC /* UIColor+Flicks.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 				5304542A1AE0EE6600A5E1D7 /* MovieDetailsViewController.swift in Sources */,
 				5381FEB61ADDF223006A72FB /* AppDelegate.swift in Sources */,
 				530454301AE3214300A5E1D7 /* Movie.swift in Sources */,
+				536BCC921AE4521F00474ECC /* UIColor+Flicks.swift in Sources */,
 				536BCC901AE3960A00474ECC /* MovieGridCell.swift in Sources */,
 				5304542D1AE2F4BB00A5E1D7 /* UIImageView+Utils.swift in Sources */,
 				530454251AE0384800A5E1D7 /* MovieCell.swift in Sources */,
