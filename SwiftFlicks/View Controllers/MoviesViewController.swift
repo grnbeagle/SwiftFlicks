@@ -169,7 +169,10 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UICollectionV
     // MARK: - UITableViewDelegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         searchBar.resignFirstResponder()
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as? MovieCell
+        cell?.setHighlighted(true, animated: true)
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        cell?.setHighlighted(false, animated: true)
     }
 
     // MARK: - UICollectionViewDelegate

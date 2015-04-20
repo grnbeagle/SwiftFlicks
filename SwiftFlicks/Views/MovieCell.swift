@@ -20,15 +20,11 @@ class MovieCell: UITableViewCell {
         super.awakeFromNib()
 
         contentView.backgroundColor = UIColor.flicksLightGrayColor()
+        containerView.backgroundColor = UIColor.whiteColor()
 
         containerView.layer.cornerRadius = 3
         containerView.layer.borderColor = UIColor.flicksMediumGrayColor().CGColor
         containerView.layer.borderWidth = 1
-
-        containerView.layer.shadowColor = UIColor.blackColor().CGColor
-        containerView.layer.shadowOpacity = 0.5
-        containerView.layer.shadowRadius = 3.0
-        containerView.layer.shadowOffset = CGSizeMake(2.0, 2.0)
 
         self.separatorInset = UIEdgeInsetsZero
         self.layoutMargins = UIEdgeInsetsZero
@@ -56,4 +52,19 @@ class MovieCell: UITableViewCell {
         metaLabel.attributedText = ratingString
         metaLabel.sizeToFit()
     }
+
+    override func setHighlighted(highlighted: Bool, animated: Bool) {
+        if highlighted {
+            containerView.backgroundColor = UIColor.flicksHighlightColor()
+            titleLabel.textColor = UIColor.whiteColor()
+            metaLabel.textColor = UIColor.whiteColor()
+            synopsisLabel.textColor = UIColor.whiteColor()
+        } else {
+            containerView.backgroundColor = UIColor.whiteColor()
+            titleLabel.textColor = UIColor.blackColor()
+            metaLabel.textColor = UIColor.blackColor()
+            synopsisLabel.textColor = UIColor.blackColor()
+        }
+    }
+
 }
