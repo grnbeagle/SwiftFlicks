@@ -62,7 +62,6 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         displayModeListIcon = UIImage(named: "List")
         displayModeGridIcon = UIImage(named: "Grid")
 
-
         announcementView.hidden = true
 
         tableView.dataSource = self
@@ -83,7 +82,6 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         self.navigationItem.rightBarButtonItem = viewToggleButton
 
         fetchData()
-        updateCollectionViews()
     }
 
     override func didReceiveMemoryWarning() {
@@ -125,14 +123,15 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDe
             if (error != nil) {
                 MBProgressHUD.hideHUDForView(self.view, animated: true)
                 self.announcementView.hidden = false
+                self.searchBar.hidden = true
             } else {
                 let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary
+                self.searchBar.hidden = false
                 if let json = json {
                     let movies = json["movies"] as? [NSDictionary]
                     if let movies = movies {
                         self.movies = Movie.moviesWithArray(movies)
-                        self.tableView.reloadData()
-                        self.collectionView.reloadData()
+                        self.updateCollectionViews()
                         MBProgressHUD.hideHUDForView(self.view, animated: true)
                     }
                 }
@@ -154,9 +153,11 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         if displayMode == .Listing {
             collectionView.hidden = true
             viewToggleButton!.image = displayModeGridIcon
+            self.tableView.reloadData()
         } else {
             collectionView.hidden = false
             viewToggleButton!.image = displayModeListIcon
+            self.collectionView.reloadData()
         }
         tableView.hidden = !collectionView.hidden
     }
