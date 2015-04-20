@@ -18,7 +18,7 @@ enum DisplayMode {
     case Grid
 }
 
-class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDelegate {
+class MoviesViewController: UIViewController, UITableViewDelegate, UICollectionViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -73,6 +73,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         tableView.layoutMargins = UIEdgeInsetsZero
 
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.backgroundColor = UIColor.flicksLightGrayColor()
 
         searchBar.delegate = self
@@ -151,10 +152,16 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDe
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let cell = sender as! UITableViewCell
-        let indexPath = tableView.indexPathForCell(cell)!
-        let movie = movies![indexPath.row]
-
+        var movie: Movie
+        if displayMode == .Listing {
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPathForCell(cell)!
+            movie = movies![indexPath.row]
+        } else {
+            let cell = sender as! UICollectionViewCell
+            let indexPath = collectionView.indexPathForCell(cell)!
+            movie = movies![indexPath.row]
+        }
         let movieDetailsViewController = segue.destinationViewController as! MovieDetailsViewController
         movieDetailsViewController.movie = movie
     }
@@ -163,6 +170,12 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         searchBar.resignFirstResponder()
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+
+    // MARK: - UICollectionViewDelegate
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = collectionView.cellForItemAtIndexPath(indexPath)
+        performSegueWithIdentifier("detailSegue", sender: cell)
     }
 }
 
@@ -227,6 +240,7 @@ extension MoviesViewController: UICollectionViewDataSource {
 
 extension MoviesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: 100, height: 100)
+        return CGSize(width: view.frame.width/2 - 15, height: 230)
     }
 }
+

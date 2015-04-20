@@ -20,9 +20,11 @@ class MovieDetailsViewController: UIViewController {
 
         self.navigationItem.title = movie.title
 
-        posterView.setImageWithURL(movie.posterThumbnailUrl)
+        if let thumbnailUrl = movie.posterThumbnailUrl {
+            posterView.setImageWithURL(thumbnailUrl)
+        }
 
-        if let highResPosterUrl = movie.postImageUrl {
+        if let highResPosterUrl = movie.posterImageUrl {
             posterView.loadAsync(highResPosterUrl, animate: false)
         }
 

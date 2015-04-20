@@ -80,7 +80,7 @@
                                             <outlet property="posterView" destination="zqM-uF-aFh" id="5Qj-LB-dtr"/>
                                             <outlet property="synopsisLabel" destination="f7y-OY-iUc" id="0np-Uz-Rx0"/>
                                             <outlet property="titleLabel" destination="91s-fY-DdT" id="oz5-51-BYL"/>
-                                            <segue destination="mza-an-991" kind="push" id="HaV-V8-a9t"/>
+                                            <segue destination="mza-an-991" kind="push" identifier="detailSegue" id="HaV-V8-a9t"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -182,7 +182,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="HPy-tL-lX3"/>
                     <connections>
-                        <outlet property="posterView" destination="ope-KQ-gHq" id="CCV-SQ-Icd"/>
+                        <outlet property="posterView" destination="ope-KQ-gHq" id="PVv-Ie-PFv"/>
                         <outlet property="scrollView" destination="4D5-0U-0B3" id="pfT-re-7TY"/>
                     </connections>
                 </viewController>

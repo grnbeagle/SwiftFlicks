@@ -13,7 +13,7 @@ class Movie {
     var title: String?
     var synopsis: String?
     var posterThumbnailUrl: NSURL?
-    var postImageUrl: NSURL?
+    var posterImageUrl: NSURL?
     var rating: Int?
     var year: Int?
     var mpaaRating: String?
@@ -42,7 +42,7 @@ class Movie {
             if let range = range {
                 posterUrlString = posterUrlString.stringByReplacingCharactersInRange(range, withString: "https://content6.flixster.com/")
             }
-            postImageUrl = NSURL(string: posterUrlString)
+            posterImageUrl = NSURL(string: posterUrlString)
         }
     }
 
