@@ -49,6 +49,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     }
 
     var refreshControl = UIRefreshControl()
+    var refreshControlGrid = UIRefreshControl()
     var viewToggleButton: UIBarButtonItem?
     var isSearch = false
 
@@ -72,11 +73,15 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         tableView.layoutMargins = UIEdgeInsetsZero
 
         collectionView.dataSource = self
+        collectionView.backgroundColor = UIColor.flicksLightGrayColor()
 
         searchBar.delegate = self
 
         refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(refreshControl)
+
+        refreshControlGrid.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
+        collectionView.addSubview(refreshControlGrid)
 
         viewToggleButton = UIBarButtonItem(image: displayModeGridIcon, style: UIBarButtonItemStyle.Plain, target: self, action: "toggleDisplayMode")
         self.navigationItem.rightBarButtonItem = viewToggleButton
@@ -87,27 +92,6 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - UITableViewDelegate
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        searchBar.resignFirstResponder()
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
-
-    // MARK: - UISearchBarDelegate
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        isSearch = !searchBar.text.isEmpty
-        if isSearch {
-            let results = movies?.filter({ (movie) -> Bool in
-                return movie.title?.lowercaseString.rangeOfString(searchBar.text.lowercaseString) != nil
-            })
-
-            searchResult = results
-        } else {
-            searchResult = []
-        }
-        tableView.reloadData()
     }
 
     func fetchData() {
@@ -142,6 +126,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     func refresh() {
         fetchData()
         refreshControl.endRefreshing()
+        refreshControlGrid.endRefreshing()
     }
 
     func toggleDisplayMode() {
@@ -174,9 +159,33 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         movieDetailsViewController.movie = movie
     }
 
+    // MARK: - UITableViewDelegate
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        searchBar.resignFirstResponder()
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
 }
 
-extension MoviesViewController : UITableViewDataSource {
+extension MoviesViewController: UISearchBarDelegate {
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        isSearch = !searchBar.text.isEmpty
+        if isSearch {
+            let results = movies?.filter({ (movie) -> Bool in
+                return movie.title?.lowercaseString.rangeOfString(searchBar.text.lowercaseString) != nil
+            })
+            searchResult = results
+        } else {
+            searchResult = []
+        }
+        if displayMode == .Listing {
+            tableView.reloadData()
+        } else {
+            collectionView.reloadData()
+        }
+    }
+}
+
+extension MoviesViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isSearch {
             if let searchResult = searchResult {
@@ -189,16 +198,14 @@ extension MoviesViewController : UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
-
+        let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
         let movie = isSearch ? searchResult![indexPath.row] : movies![indexPath.row]
         cell.setMovie(movie)
-
         return cell
     }
 }
 
-extension MoviesViewController : UICollectionViewDataSource {
+extension MoviesViewController: UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if isSearch {
             if let searchResult = searchResult {
@@ -211,15 +218,14 @@ extension MoviesViewController : UICollectionViewDataSource {
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieGridCell", forIndexPath: indexPath) as! MovieGridCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieGridCell", forIndexPath: indexPath) as! MovieGridCell
         let movie = isSearch ? searchResult![indexPath.row] : movies![indexPath.row]
-        cell.posterView.loadAsync(movie.posterThumbnailUrl!)
-        cell.titleLabel.text = movie.title
+        cell.setMovie(movie)
         return cell
     }
 }
 
-extension MoviesViewController : UICollectionViewDelegateFlowLayout {
+extension MoviesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return CGSize(width: 100, height: 100)
     }
