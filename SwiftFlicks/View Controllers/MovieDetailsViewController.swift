@@ -23,7 +23,7 @@ class MovieDetailsViewController: UIViewController {
         self.navigationItem.title = movie.title
         self.edgesForExtendedLayout = UIRectEdge.None
 
-        if let thumbnailUrl = movie.posterThumbnailUrl {
+        if let thumbnailUrl = movie.posterMediumUrl {
             posterView.setImageWithURL(thumbnailUrl)
         }
 
