@@ -32,7 +32,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UICollectionV
     var displayModeGridIcon: UIImage?
 
     var movies: [Movie]?
-    var searchResult: [Movie]?
+    var searchResults: [Movie]?
     var viewMode: ViewMode = .Movie
     var displayMode: DisplayMode = .Listing
 
@@ -108,7 +108,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UICollectionV
             if self.view == nil {
                 return
             }
-            if (error != nil) {
+            if error != nil {
                 MBProgressHUD.hideHUDForView(self.view, animated: true)
                 self.announcementView.hidden = false
                 self.searchBar.hidden = true
@@ -159,11 +159,11 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UICollectionV
         if displayMode == .Listing {
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPathForCell(cell)!
-            movie = movies![indexPath.row]
+            movie = isSearch ? searchResults![indexPath.row] : movies![indexPath.row]
         } else {
             let cell = sender as! UICollectionViewCell
             let indexPath = collectionView.indexPathForCell(cell)!
-            movie = movies![indexPath.row]
+            movie = isSearch ? searchResults![indexPath.row] : movies![indexPath.row]
             (cell as! MovieGridCell).setHighlighted(false, animated: true)
         }
         let movieDetailsViewController = segue.destinationViewController as! MovieDetailsViewController
@@ -198,9 +198,9 @@ extension MoviesViewController: UISearchBarDelegate {
             let results = movies?.filter({ (movie) -> Bool in
                 return movie.title?.lowercaseString.rangeOfString(searchBar.text.lowercaseString) != nil
             })
-            searchResult = results
+            searchResults = results
         } else {
-            searchResult = []
+            searchResults = []
         }
         if displayMode == .Listing {
             tableView.reloadData()
@@ -213,8 +213,8 @@ extension MoviesViewController: UISearchBarDelegate {
 extension MoviesViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isSearch {
-            if let searchResult = searchResult {
-                return searchResult.count
+            if let searchResults = searchResults {
+                return searchResults.count
             }
         } else if let movies = movies {
             return movies.count
@@ -224,7 +224,7 @@ extension MoviesViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
-        let movie = isSearch ? searchResult![indexPath.row] : movies![indexPath.row]
+        let movie = isSearch ? searchResults![indexPath.row] : movies![indexPath.row]
         cell.setMovie(movie)
         return cell
     }
@@ -233,8 +233,8 @@ extension MoviesViewController: UITableViewDataSource {
 extension MoviesViewController: UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if isSearch {
-            if let searchResult = searchResult {
-                return searchResult.count
+            if let searchResults = searchResults {
+                return searchResults.count
             }
         } else if let movies = movies {
             return movies.count
@@ -244,7 +244,7 @@ extension MoviesViewController: UICollectionViewDataSource {
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieGridCell", forIndexPath: indexPath) as! MovieGridCell
-        let movie = isSearch ? searchResult![indexPath.row] : movies![indexPath.row]
+        let movie = isSearch ? searchResults![indexPath.row] : movies![indexPath.row]
         cell.setMovie(movie)
         return cell
     }
