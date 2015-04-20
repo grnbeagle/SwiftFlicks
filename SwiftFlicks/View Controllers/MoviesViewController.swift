@@ -84,7 +84,8 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UICollectionV
         refreshControlGrid.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
         collectionView.addSubview(refreshControlGrid)
 
-        viewToggleButton = UIBarButtonItem(image: displayModeGridIcon, style: UIBarButtonItemStyle.Plain, target: self, action: "toggleDisplayMode")
+        viewToggleButton = UIBarButtonItem(image: displayModeGridIcon, style: UIBarButtonItemStyle.Plain,
+            target: self, action: "toggleDisplayMode")
         self.navigationItem.rightBarButtonItem = viewToggleButton
 
         fetchData()
@@ -100,7 +101,8 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UICollectionV
         let request = NSURLRequest(URL: url)
 
         MBProgressHUD.showHUDAddedTo(view, animated: true)
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse!, data: NSData!, error: NSError!) ->
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
+            (response: NSURLResponse!, data: NSData!, error: NSError!) ->
             Void in
             if self.view == nil {
                 return
@@ -161,6 +163,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UICollectionV
             let cell = sender as! UICollectionViewCell
             let indexPath = collectionView.indexPathForCell(cell)!
             movie = movies![indexPath.row]
+            (cell as! MovieGridCell).setHighlighted(false, animated: true)
         }
         let movieDetailsViewController = segue.destinationViewController as! MovieDetailsViewController
         movieDetailsViewController.movie = movie
@@ -177,8 +180,13 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UICollectionV
 
     // MARK: - UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = collectionView.cellForItemAtIndexPath(indexPath)
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as? MovieGridCell
+        cell?.setHighlighted(true, animated: true)
         performSegueWithIdentifier("detailSegue", sender: cell)
+    }
+
+    func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
     }
 }
 

@@ -46,4 +46,17 @@ class MovieGridCell: UICollectionViewCell {
         metaLabel.attributedText = ratingString
         metaLabel.sizeToFit()
     }
+
+    func setHighlighted(highlighted: Bool, animated: Bool) {
+        if highlighted {
+            containerView.backgroundColor = UIColor.flicksHighlightColor()
+            titleLabel.textColor = UIColor.whiteColor()
+            metaLabel.textColor = UIColor.whiteColor()
+        } else {
+            containerView.backgroundColor = UIColor.whiteColor()
+            titleLabel.textColor = UIColor.blackColor()
+            metaLabel.textColor = UIColor.blackColor()
+        }
+        self.setNeedsDisplay()
+    }
 }
