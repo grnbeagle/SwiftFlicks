@@ -41,6 +41,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     }
 
     var refreshControl = UIRefreshControl()
+    var viewToggleButton: UIBarButtonItem?
     var isSearch = false
 
     override func viewDidLoad() {
@@ -48,6 +49,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDe
 
         self.navigationItem.title = screenTitle
         self.edgesForExtendedLayout = UIRectEdge.None
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
 
         announcementView.hidden = true
 
@@ -61,12 +63,20 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDe
 
         collectionView.dataSource = self
         collectionView.hidden = true
-//        collectionView.contentInset = UIEdgeInsetsMake(navigationController!.navigationBar.frame.height, 0, 0, 0)
 
         searchBar.delegate = self
 
         refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(refreshControl)
+
+//        var viewToggleView = UIButton(frame: CGRectMake(0, 0, 30, 30))
+//        viewToggleView.addTarget(self, action: "toggleView", forControlEvents: UIControlEvents.TouchUpInside)
+//        viewToggleView.setBackgroundImage(UIImage(named: "Grid"), forState: UIControlState.Normal)
+//        viewToggleView.tintColor = UIColor.whiteColor()
+//        viewToggleButton = UIBarButtonItem(customView: viewToggleView)
+
+        viewToggleButton = UIBarButtonItem(image: UIImage(named: "Grid"), style: UIBarButtonItemStyle.Plain, target: self, action: "toggleView")
+        self.navigationItem.rightBarButtonItem = viewToggleButton
 
         fetchData()
     }
@@ -128,6 +138,10 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     func refresh() {
         fetchData()
         refreshControl.endRefreshing()
+    }
+
+    func toggleView() {
+        
     }
 
     // MARK: - Navigation

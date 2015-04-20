@@ -14,9 +14,9 @@
 		536BCC851AE3828B00474ECC /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BCC841AE3828B00474ECC /* MoviesViewController.swift */; };
 		536BCC901AE3960A00474ECC /* MovieGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BCC8F1AE3960A00474ECC /* MovieGridCell.swift */; };
 		536BCC921AE4521F00474ECC /* UIColor+Flicks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BCC911AE4521F00474ECC /* UIColor+Flicks.swift */; };
+		536BCC981AE472F500474ECC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 536BCC971AE472F500474ECC /* Images.xcassets */; };
 		5381FEB61ADDF223006A72FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5381FEB51ADDF223006A72FB /* AppDelegate.swift */; };
 		5381FEBB1ADDF223006A72FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5381FEB91ADDF223006A72FB /* Main.storyboard */; };
-		5381FEBD1ADDF223006A72FB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5381FEBC1ADDF223006A72FB /* Images.xcassets */; };
 		5381FEC01ADDF223006A72FB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5381FEBE1ADDF223006A72FB /* LaunchScreen.xib */; };
 		5381FECC1ADDF223006A72FB /* SwiftFlicksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5381FECB1ADDF223006A72FB /* SwiftFlicksTests.swift */; };
 		6C7D7307EC302FA8FFBAEFBE /* libPods-SwiftFlicks.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BA3BE152252DC749C8D6848 /* libPods-SwiftFlicks.a */; };
@@ -41,11 +41,11 @@
 		536BCC841AE3828B00474ECC /* MoviesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 		536BCC8F1AE3960A00474ECC /* MovieGridCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieGridCell.swift; sourceTree = "<group>"; };
 		536BCC911AE4521F00474ECC /* UIColor+Flicks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Flicks.swift"; sourceTree = "<group>"; };
+		536BCC971AE472F500474ECC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5381FEB01ADDF223006A72FB /* SwiftFlicks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftFlicks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5381FEB41ADDF223006A72FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5381FEB51ADDF223006A72FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5381FEBA1ADDF223006A72FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		5381FEBC1ADDF223006A72FB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5381FEBF1ADDF223006A72FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		5381FEC51ADDF223006A72FB /* SwiftFlicksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftFlicksTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5381FECA1ADDF223006A72FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -123,13 +123,13 @@
 		5381FEB21ADDF223006A72FB /* SwiftFlicks */ = {
 			isa = PBXGroup;
 			children = (
+				536BCC971AE472F500474ECC /* Images.xcassets */,
 				5304542E1AE3212800A5E1D7 /* Models */,
 				5304542B1AE2F42E00A5E1D7 /* Extensions */,
 				530454211AE037F000A5E1D7 /* Views */,
 				53C0D1971AE031490033396E /* View Controllers */,
 				5381FEB51ADDF223006A72FB /* AppDelegate.swift */,
 				5381FEB91ADDF223006A72FB /* Main.storyboard */,
-				5381FEBC1ADDF223006A72FB /* Images.xcassets */,
 				5381FEBE1ADDF223006A72FB /* LaunchScreen.xib */,
 				5381FEB31ADDF223006A72FB /* Supporting Files */,
 				530454261AE03A8300A5E1D7 /* SwiftFlicks-Bridging-Header.h */,
@@ -270,9 +270,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				536BCC981AE472F500474ECC /* Images.xcassets in Resources */,
 				5381FEBB1ADDF223006A72FB /* Main.storyboard in Resources */,
 				5381FEC01ADDF223006A72FB /* LaunchScreen.xib in Resources */,
-				5381FEBD1ADDF223006A72FB /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

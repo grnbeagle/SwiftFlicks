@@ -19,7 +19,6 @@ class MovieCell: UITableViewCell {
         super.awakeFromNib()
 
         contentView.backgroundColor = UIColor.flicksLightGrayColor()
-//        self.contentView.frame = CGRectOffset(self.contentView.frame, -20, -20)
 
         containerView.layer.cornerRadius = 3
         containerView.layer.borderColor = UIColor.flicksMediumGrayColor().CGColor
