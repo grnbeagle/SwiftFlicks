@@ -25,16 +25,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         moviesViewController?.viewMode = .Movie
         var moviesNavController = UINavigationController(rootViewController: moviesViewController!)
         moviesNavController.tabBarItem.title = "Movies"
+        moviesNavController.tabBarItem.image = UIImage(named: "Movie")
 
 
         var dvdViewController = storyboard.instantiateViewControllerWithIdentifier("MoviesViewController") as? MoviesViewController
         dvdViewController?.viewMode = .DVD
         var dvdNavController = UINavigationController(rootViewController: dvdViewController!)
         dvdNavController.tabBarItem.title = "DVD"
+        dvdNavController.tabBarItem.image = UIImage(named: "DVD")
 
         var tabBarController = UITabBarController()
         tabBarController.viewControllers = [moviesNavController, dvdNavController]
-
+        tabBarController.tabBar.barTintColor = UIColor.flicksDarkGrayColor()
+        tabBarController.tabBar.tintColor = UIColor.whiteColor()
 
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()

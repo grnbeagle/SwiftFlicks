@@ -13,6 +13,11 @@ enum ViewMode {
     case DVD
 }
 
+enum DisplayMode {
+    case Listing
+    case Grid
+}
+
 class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
@@ -23,10 +28,13 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDe
 
     let apiMoviesUrlString = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=dagqdghwaq3e3mxyrp7kmmj5&limit=20&country=us"
     let apiDVDUrlString = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=dagqdghwaq3e3mxyrp7kmmj5&limit=20&country=us"
+    var displayModeListIcon: UIImage?
+    var displayModeGridIcon: UIImage?
 
     var movies: [Movie]?
     var searchResult: [Movie]?
     var viewMode: ViewMode = .Movie
+    var displayMode: DisplayMode = .Listing
 
     var apiUrlString: String {
         get {
@@ -51,6 +59,10 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         self.edgesForExtendedLayout = UIRectEdge.None
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
 
+        displayModeListIcon = UIImage(named: "List")
+        displayModeGridIcon = UIImage(named: "Grid")
+
+
         announcementView.hidden = true
 
         tableView.dataSource = self
@@ -69,13 +81,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(refreshControl)
 
-//        var viewToggleView = UIButton(frame: CGRectMake(0, 0, 30, 30))
-//        viewToggleView.addTarget(self, action: "toggleView", forControlEvents: UIControlEvents.TouchUpInside)
-//        viewToggleView.setBackgroundImage(UIImage(named: "Grid"), forState: UIControlState.Normal)
-//        viewToggleView.tintColor = UIColor.whiteColor()
-//        viewToggleButton = UIBarButtonItem(customView: viewToggleView)
-
-        viewToggleButton = UIBarButtonItem(image: UIImage(named: "Grid"), style: UIBarButtonItemStyle.Plain, target: self, action: "toggleView")
+        viewToggleButton = UIBarButtonItem(image: displayModeGridIcon, style: UIBarButtonItemStyle.Plain, target: self, action: "toggleView")
         self.navigationItem.rightBarButtonItem = viewToggleButton
 
         fetchData()
@@ -141,7 +147,15 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     }
 
     func toggleView() {
-        
+        displayMode = displayMode == .Listing ? .Grid : .Listing
+        if displayMode == .Listing {
+            collectionView.hidden = true
+            viewToggleButton!.image = displayModeListIcon
+        } else {
+            collectionView.hidden = false
+            viewToggleButton!.image = displayModeGridIcon
+        }
+        tableView.hidden = !collectionView.hidden
     }
 
     // MARK: - Navigation
