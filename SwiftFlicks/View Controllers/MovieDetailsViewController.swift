@@ -28,7 +28,7 @@ class MovieDetailsViewController: UIViewController {
         }
 
         if let highResPosterUrl = movie.posterImageUrl {
-            posterView.loadAsync(highResPosterUrl, animate: false)
+            posterView.loadAsync(highResPosterUrl, animate: false, failure: nil)
         }
 
         var contentView = UIView(frame: CGRect(x: CGFloat(0), y: topPosition, width: view.frame.width, height: view.frame.height))

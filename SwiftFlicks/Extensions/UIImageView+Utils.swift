@@ -9,7 +9,8 @@
 import Foundation
 
 extension UIImageView {
-    func loadAsync(url:NSURL, animate: Bool = true) {
+    func loadAsync(url:NSURL, animate: Bool = true,
+        failure: ((request: NSURLRequest!, response: NSHTTPURLResponse!, error: NSError!) -> Void)?) {
         weak var weakSelf = self
 
         var request = NSURLRequest(URL: url)
@@ -25,6 +26,6 @@ extension UIImageView {
             } else {
                 weakSelf?.image = image
             }
-        }, failure: nil)
+        }, failure: failure)
     }
 }

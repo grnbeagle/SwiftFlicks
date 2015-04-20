@@ -31,7 +31,6 @@
                                 <rect key="frame" x="0.0" y="44" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <inset key="contentInset" minX="0.0" minY="0.0" maxX="0.0" maxY="-100"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="116" id="YU8-FH-mr6" customClass="MovieCell" customModule="SwiftFlicks" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="22" width="320" height="116"/>
@@ -54,6 +53,7 @@
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="zqM-uF-aFh">
                                                             <rect key="frame" x="0.0" y="0.0" width="80" height="105"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" red="0.92032025170110499" green="0.92032025170110499" blue="0.92032025170110499" alpha="1" colorSpace="calibratedRGB"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Synopsis" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="f7y-OY-iUc">
                                                             <rect key="frame" x="90" y="46" width="200" height="52"/>
@@ -116,6 +116,7 @@
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="wzx-yN-tKu">
                                                             <rect key="frame" x="0.0" y="0.0" width="145" height="176"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <color key="backgroundColor" red="0.92032025169999998" green="0.92032025169999998" blue="0.92032025169999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fast and Furious 7" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dtn-QT-Xxz">
                                                             <rect key="frame" x="10" y="182" width="130" height="21"/>

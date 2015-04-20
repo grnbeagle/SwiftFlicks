@@ -39,7 +39,14 @@ class MovieCell: UITableViewCell {
     func setMovie(movie: Movie) {
         titleLabel.text = movie.title
         synopsisLabel.text = movie.synopsis
-        posterView.loadAsync(movie.posterThumbnailUrl!)
+        posterView.image = nil
+
+        // Try medium first, and if there's an error, load thumbnail
+        posterView.loadAsync(movie.posterMediumUrl!, animate: true) { (request, response, error) -> Void in
+            if self.posterView.image == nil {
+                self.posterView.loadAsync(movie.posterThumbnailUrl!, failure: nil)
+            }
+        }
 
         var ratingIcon = NSTextAttachment()
         ratingIcon.image = UIImage(named: movie.rating > 50 ? "Fresh" : "Rotten")
@@ -66,5 +73,7 @@ class MovieCell: UITableViewCell {
             synopsisLabel.textColor = UIColor.blackColor()
         }
     }
+
+
 
 }

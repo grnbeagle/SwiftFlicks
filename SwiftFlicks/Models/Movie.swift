@@ -13,6 +13,7 @@ class Movie {
     var title: String?
     var synopsis: String?
     var posterThumbnailUrl: NSURL?
+    var posterMediumUrl: NSURL?
     var posterImageUrl: NSURL?
     var rating: Int?
     var year: Int?
@@ -34,6 +35,7 @@ class Movie {
         var thumbnailUrlString = dictionary.valueForKeyPath("posters.detailed") as? String
 
         if let thumbnailUrlString = thumbnailUrlString {
+            posterThumbnailUrl = NSURL(string: thumbnailUrlString)
             // Workaround to getting high res poster image
             var posterUrlString = thumbnailUrlString.stringByReplacingOccurrencesOfString("tmb", withString: "ori")
             var range = posterUrlString.rangeOfString(".*cloudfront.net/", options: .RegularExpressionSearch)
@@ -45,7 +47,7 @@ class Movie {
 
             // https://content6.flixster.com/movie/11/18/14/11181482_det.jpg
             var newThumbUrlString = posterUrlString.stringByReplacingOccurrencesOfString("ori", withString: "det")
-            posterThumbnailUrl = NSURL(string: newThumbUrlString)
+            posterMediumUrl = NSURL(string: newThumbUrlString)
         }
     }
 

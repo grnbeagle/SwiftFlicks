@@ -32,7 +32,13 @@ class MovieGridCell: UICollectionViewCell {
     }
 
     func setMovie(movie: Movie) {
-        posterView.loadAsync(movie.posterThumbnailUrl!)
+        // Try medium first, and if there's an error, load thumbnail
+        posterView.loadAsync(movie.posterMediumUrl!, animate: true) { (request, response, error) -> Void in
+            if self.posterView.image == nil {
+                self.posterView.loadAsync(movie.posterThumbnailUrl!, failure: nil)
+            }
+        }
+
         titleLabel.text = movie.title
 
         var ratingIcon = NSTextAttachment()

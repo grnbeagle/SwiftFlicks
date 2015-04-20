@@ -69,6 +69,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UICollectionV
         tableView.delegate = self
         tableView.backgroundColor = UIColor.flicksLightGrayColor()
         tableView.separatorColor = UIColor.flicksLightGrayColor()
+        tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0)
         tableView.separatorInset = UIEdgeInsetsZero
         tableView.layoutMargins = UIEdgeInsetsZero
 
