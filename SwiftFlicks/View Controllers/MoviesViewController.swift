@@ -192,11 +192,8 @@ extension MoviesViewController : UITableViewDataSource {
         var cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
 
         let movie = isSearch ? searchResult![indexPath.row] : movies![indexPath.row]
-        cell.titleLabel.text = movie.title
-        cell.synopsisLabel.text = movie.synopsis
-        cell.posterView.loadAsync(movie.posterThumbnailUrl!)
-        cell.separatorInset = UIEdgeInsetsZero
-        cell.layoutMargins = UIEdgeInsetsZero
+        cell.setMovie(movie)
+
         return cell
     }
 }

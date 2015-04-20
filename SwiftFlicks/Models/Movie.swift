@@ -14,6 +14,9 @@ class Movie {
     var synopsis: String?
     var posterThumbnailUrl: NSURL?
     var postImageUrl: NSURL?
+    var rating: Int?
+    var year: Int?
+    var mpaaRating: String?
 
     init() {
 
@@ -24,6 +27,9 @@ class Movie {
 
         title = dictionary["title"] as? String
         synopsis = dictionary["synopsis"] as? String
+        rating = dictionary.valueForKeyPath("ratings.critics_score") as? Int
+        year = dictionary["year"] as? Int
+        mpaaRating = dictionary["mpaa_rating"] as? String
 
         var thumbnailUrlString = dictionary.valueForKeyPath("posters.detailed") as? String
 
