@@ -71,20 +71,19 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         tableView.separatorColor = UIColor.flicksLightGrayColor()
         tableView.separatorInset = UIEdgeInsetsZero
         tableView.layoutMargins = UIEdgeInsetsZero
-        tableView.hidden = false
 
         collectionView.dataSource = self
-        collectionView.hidden = true
 
         searchBar.delegate = self
 
         refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(refreshControl)
 
-        viewToggleButton = UIBarButtonItem(image: displayModeGridIcon, style: UIBarButtonItemStyle.Plain, target: self, action: "toggleView")
+        viewToggleButton = UIBarButtonItem(image: displayModeGridIcon, style: UIBarButtonItemStyle.Plain, target: self, action: "toggleDisplayMode")
         self.navigationItem.rightBarButtonItem = viewToggleButton
 
         fetchData()
+        updateCollectionViews()
     }
 
     override func didReceiveMemoryWarning() {
@@ -146,14 +145,18 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         refreshControl.endRefreshing()
     }
 
-    func toggleView() {
+    func toggleDisplayMode() {
         displayMode = displayMode == .Listing ? .Grid : .Listing
+        updateCollectionViews()
+    }
+
+    func updateCollectionViews() {
         if displayMode == .Listing {
             collectionView.hidden = true
-            viewToggleButton!.image = displayModeListIcon
+            viewToggleButton!.image = displayModeGridIcon
         } else {
             collectionView.hidden = false
-            viewToggleButton!.image = displayModeGridIcon
+            viewToggleButton!.image = displayModeListIcon
         }
         tableView.hidden = !collectionView.hidden
     }
