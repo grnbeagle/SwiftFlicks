@@ -16,6 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
+        // Set up caching - 4mb memory, 100mb of disk
+        var URLCache = NSURLCache(memoryCapacity: 4 * 1024 * 1024, diskCapacity: 100 * 1024 * 1024, diskPath: nil)
+        NSURLCache.setSharedURLCache(URLCache)
+
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         var storyboard = UIStoryboard(name: "Main", bundle: nil)
         UINavigationBar.appearance().barTintColor = UIColor.flicksDarkGrayColor()

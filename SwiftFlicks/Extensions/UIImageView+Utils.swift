@@ -13,7 +13,7 @@ extension UIImageView {
         failure: ((request: NSURLRequest!, response: NSHTTPURLResponse!, error: NSError!) -> Void)?) {
         weak var weakSelf = self
 
-        var request = NSURLRequest(URL: url)
+        var request = NSURLRequest(URL: url, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 5)
         self.setImageWithURLRequest(request, placeholderImage: nil, success: { (request, response, image) -> Void in
             if animate {
                 if let weakSelf = weakSelf {

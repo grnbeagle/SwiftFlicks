@@ -26,8 +26,10 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UICollectionV
     @IBOutlet weak var announcementView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
 
-    let apiMoviesUrlString = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=dagqdghwaq3e3mxyrp7kmmj5&limit=20&country=us"
-    let apiDVDUrlString = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=dagqdghwaq3e3mxyrp7kmmj5&limit=20&country=us"
+    let apiMoviesUrlString = "https://gist.githubusercontent.com/timothy1ee/d1778ca5b944ed974db0/raw/489d812c7ceeec0ac15ab77bf7c47849f2d1eb2b/gistfile1.json"
+    //"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=dagqdghwaq3e3mxyrp7kmmj5&limit=20&country=us"
+    let apiDVDUrlString = "https://gist.githubusercontent.com/timothy1ee/e41513a57049e21bc6cf/raw/b490e79be2d21818f28614ec933d5d8f467f0a66/gistfile1.json"
+    //"http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=dagqdghwaq3e3mxyrp7kmmj5&limit=20&country=us"
     var displayModeListIcon: UIImage?
     var displayModeGridIcon: UIImage?
 
@@ -99,9 +101,10 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UICollectionV
 
     func fetchData() {
         let url = NSURL(string: apiUrlString)!
-        let request = NSURLRequest(URL: url)
+        let request = NSURLRequest(URL: url, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 5)
 
         MBProgressHUD.showHUDAddedTo(view, animated: true)
+
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
             (response: NSURLResponse!, data: NSData!, error: NSError!) ->
             Void in
