@@ -31,7 +31,7 @@ Credits
 ---------
 * [Rotten Tomatoes API](http://developer.rottentomatoes.com/docs/read/JSON)
 * [AFNetworking](https://github.com/AFNetworking/AFNetworking)
-* [MBProgressHUD]*https://github.com/matej/MBProgressHUD)
+* [MBProgressHUD](https://github.com/matej/MBProgressHUD)
 * [The Noun Project](https://thenounproject.com) 
    * https://thenounproject.com/term/list/10135/
    * https://thenounproject.com/term/grid/16450/
