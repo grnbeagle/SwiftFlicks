@@ -109,12 +109,9 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UICollectionV
                 return
             }
             if error != nil {
-                MBProgressHUD.hideHUDForView(self.view, animated: true)
-                self.announcementView.hidden = false
-                self.searchBar.hidden = true
+                self.showErrorState()
             } else {
                 let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary
-                self.searchBar.hidden = false
                 if let json = json {
                     let movies = json["movies"] as? [NSDictionary]
                     if let movies = movies {
@@ -122,9 +119,18 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UICollectionV
                         self.updateCollectionViews()
                         MBProgressHUD.hideHUDForView(self.view, animated: true)
                     }
+                    self.searchBar.hidden = false
+                } else {
+                    self.showErrorState()
                 }
             }
         }
+    }
+
+    func showErrorState() {
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
+        self.announcementView.hidden = false
+        self.searchBar.hidden = true
     }
 
     func refresh() {
