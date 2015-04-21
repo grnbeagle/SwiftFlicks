@@ -23,6 +23,7 @@ Time spent: 15 hours
 - [x] Customize the navigation bar.
 - [x] Add a tab bar for Box Office and DVD.
 - [x] Add a search bar.
+- [x] Implement a toggle control to switch between list view and grid view.
 
 ### Walkthrough
 ![Video Walkthrough](SwiftFlicks.gif)
